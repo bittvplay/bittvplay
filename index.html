@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bit TV Play</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:  #F97316;
+      --magenta: #EC4899;
+      --purple:  #7C3AED;
+      --cyan:    #06B6D4;
+      --dark:    #0A0A14;
+      --dark2:   #12121F;
+      --card:    #1A1A2E;
+      --text:    #E2E8F0;
+      --muted:   #94A3B8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 40%, rgba(236,72,153,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 60%, rgba(124,58,237,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 50% 10%, rgba(249,115,22,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .logo {
+      width: min(220px, 55vw);
+      height: auto;
+      border-radius: 24px;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 40px rgba(236,72,153,0.4));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 10vw, 6rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--orange), var(--magenta), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 0 30px rgba(37,211,102,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 45px rgba(37,211,102,0.5);
+    }
+    .btn-whatsapp svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+    .trial-badge {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      background: var(--dark2);
+      padding: 5rem 1.5rem;
+    }
+
+    .features h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      text-align: center;
+      letter-spacing: 0.05em;
+      margin-bottom: 3rem;
+      color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(236,72,153,0.3);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      padding: 5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(124,58,237,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+    .cta p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    /* ── PRIVACY ── */
+    .privacy {
+      background: var(--dark2);
+      padding: 5rem 1.5rem;
+    }
+    .privacy-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .privacy h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+      color: var(--magenta);
+    }
+    .privacy h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cyan);
+      margin: 1.75rem 0 0.5rem;
+    }
+    .privacy p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .privacy a { color: var(--cyan); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    @media (max-width: 480px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img src="logo5.png" alt="Bit TV Play" class="logo"/>
+    <h1>Bit TV Play</h1>
+    <p>Tu entretenimiento completo en un solo lugar. TV en Vivo, Películas y Series sin complicaciones.</p>
+    <a class="btn-whatsapp" href="https://wa.me/56964672416" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.096.541 4.143 1.57 5.943L.057 23.486a.5.5 0 0 0 .614.614l5.543-1.513A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.87 9.87 0 0 1-5.031-1.378l-.36-.214-3.732 1.018 1.018-3.732-.214-.36A9.87 9.87 0 0 1 2.118 12C2.118 6.54 6.54 2.118 12 2.118S21.882 6.54 21.882 12 17.46 21.882 12 21.882z"/></svg>
+      Pedir mi cuenta
+    </a>
+    <p class="trial-badge">✦ Prueba gratis 2 horas sin costo ✦</p>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <h2>¿Qué incluye?</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="card-icon">📺</span>
+        <h3>TV en Vivo</h3>
+        <p>Canales en directo con transmisión estable y sin cortes.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎬</span>
+        <h3>Películas</h3>
+        <p>Amplio catálogo de películas disponibles cuando quieras.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📡</span>
+        <h3>Series</h3>
+        <p>Todas las temporadas de tus series favoritas en un solo lugar.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚡</span>
+        <h3>Alta calidad</h3>
+        <p>Streaming en SD, HD y 4K según tu conexión.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📱</span>
+        <h3>Multi-dispositivo</h3>
+        <p>Disponible en Android, Smart TV y más.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">⭐</span>
+        <h3>Favoritos</h3>
+        <p>Guarda tus canales y contenido preferido para acceso rápido.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Empieza hoy</h2>
+    <p>Escríbenos por WhatsApp y activa tu cuenta en minutos.</p>
+    <a class="btn-whatsapp" href="https://wa.me/56964672416" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.096.541 4.143 1.57 5.943L.057 23.486a.5.5 0 0 0 .614.614l5.543-1.513A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.87 9.87 0 0 1-5.031-1.378l-.36-.214-3.732 1.018 1.018-3.732-.214-.36A9.87 9.87 0 0 1 2.118 12C2.118 6.54 6.54 2.118 12 2.118S21.882 6.54 21.882 12 17.46 21.882 12 21.882z"/></svg>
+      Contactar por WhatsApp
+    </a>
+  </section>
+
+  <!-- POLÍTICA DE PRIVACIDAD -->
+  <section class="privacy" id="privacidad">
+    <div class="privacy-inner">
+      <h2>Política de Privacidad</h2>
+      <p><em>Última actualización: junio 2026</em></p>
+
+      <h3>1. Qué es Bit TV Play</h3>
+      <p>Bit TV Play es un reproductor multimedia para dispositivos Android. No aloja, distribuye ni provee contenido propio. El acceso al servicio requiere una suscripción activa contratada directamente con el proveedor.</p>
+
+      <h3>2. Datos que recopilamos</h3>
+      <p>Bit TV Play no recopila, almacena ni comparte datos personales de sus usuarios. La aplicación no requiere registro ni inicio de sesión dentro de la app.</p>
+
+      <h3>3. Servicios de terceros</h3>
+      <p>La app se conecta a servidores externos para reproducir el contenido del usuario. No compartimos información con terceros ni con plataformas de publicidad.</p>
+
+      <h3>4. Seguridad</h3>
+      <p>Al no almacenar datos personales, no existe riesgo de filtración de información desde nuestra aplicación.</p>
+
+      <h3>5. Cambios a esta política</h3>
+      <p>Podemos actualizar esta política ocasionalmente. Cualquier cambio será publicado en esta misma página.</p>
+
+      <h3>6. Contacto</h3>
+      <p>Si tienes preguntas sobre esta política escríbenos por WhatsApp: <a href="https://wa.me/56964672416" target="_blank">wa.me/56964672416</a></p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Bit TV Play · Reproductor multimedia · <a href="#privacidad" style="color:var(--cyan)">Política de Privacidad</a></p>
+  </footer>
+
+</body>
+</html>
